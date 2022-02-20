@@ -64,6 +64,7 @@ const Homepage = () => {
       .get(API)
       .then(function (response) {
         setPlayerStats(response.data[0]);
+        console.log(response.data[0]);
       })
       .catch(function (error) {
         console.log(error);
@@ -71,8 +72,8 @@ const Homepage = () => {
   }
 
   // Total Games Played
-  // const rank = playerStats.tier + " " + playerStats.rank;
-  // const total = playerStats.wins + playerStats.losses;
+  const rank = playerStats.tier + " " + playerStats.rank;
+  const total = playerStats.wins + playerStats.losses;
 
   return (
     <>
@@ -103,10 +104,10 @@ const Homepage = () => {
           <p>Summoner Level: {playerData.summonerLevel} </p>
           <Row>
             <Col span={12}>
-              <Statistic title='Solo/Duo Games Played' value={"5"} />
+              <Statistic title='Solo/Duo Games Played' value={total} />
             </Col>
             <Col span={12}>
-              <Statistic title='Current Rank' value={"6"} />
+              <Statistic title='Current Rank' value={rank} />
             </Col>
             <Col span={12}>
               <Statistic title='Solo/Duo Wins' value={playerStats.wins} />
