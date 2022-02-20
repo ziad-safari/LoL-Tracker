@@ -3,7 +3,6 @@ import { useState } from "react";
 import { Typography, Row, Col, Statistic } from "antd";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { leagueCards } from "../components";
 import championNames from "./championNames.json";
 
 const { Title } = Typography;
@@ -14,7 +13,7 @@ const Homepage = () => {
   const [playerStats, setPlayerStats] = useState({});
   const [champStats, setChampStats] = useState({});
 
-  const API_KEY = "RGAPI-7f299e10-ff24-4589-9f8e-9126dd538c1a";
+  const API_KEY = "RGAPI-ed960078-5f6d-4d41-84b1-70e8c208608f";
 
   function searchForPlayer(event) {
     var APICallSummoner =
@@ -30,7 +29,6 @@ const Homepage = () => {
         if (response.data) {
           searchPlayerData(response.data.id);
           searchChampion(response.data.id);
-          Rend();
         }
       })
       .catch(function (error) {
@@ -65,26 +63,16 @@ const Homepage = () => {
     axios
       .get(API)
       .then(function (response) {
-        setPlayerStats(response.data[1]);
+        setPlayerStats(response.data[0]);
       })
       .catch(function (error) {
         console.log(error);
       });
   }
 
-  function Rend() {
-    const cham = [];
-    console.log(championNames[champStats[0].championId]);
-    for (var i = 0; i < championNames.length; i++) {
-      cham.push(championNames[champStats[i].championId]);
-    }
-
-    return <>{cham}</>;
-  }
-
   // Total Games Played
-  const total = playerStats.wins + playerStats.losses;
-  const rank = playerStats.tier + " " + playerStats.rank;
+  // const rank = playerStats.tier + " " + playerStats.rank;
+  // const total = playerStats.wins + playerStats.losses;
 
   return (
     <>
@@ -100,8 +88,8 @@ const Homepage = () => {
         }}>
         Search Player
       </button>
-      {JSON.stringify(playerData) != "{}" &&
-      JSON.stringify(playerStats) != "{}" ? (
+      {JSON.stringify(playerData) !== "{}" &&
+      JSON.stringify(playerStats) !== "{}" ? (
         <>
           <h1>{playerData.name}</h1>
           <img
@@ -115,10 +103,10 @@ const Homepage = () => {
           <p>Summoner Level: {playerData.summonerLevel} </p>
           <Row>
             <Col span={12}>
-              <Statistic title='Solo/Duo Games Played' value={total} />
+              <Statistic title='Solo/Duo Games Played' value={"5"} />
             </Col>
             <Col span={12}>
-              <Statistic title='Current Rank' value={rank} />
+              <Statistic title='Current Rank' value={"6"} />
             </Col>
             <Col span={12}>
               <Statistic title='Solo/Duo Wins' value={playerStats.wins} />
@@ -127,13 +115,12 @@ const Homepage = () => {
               <Statistic title='Solo/Duo Losses' value={playerStats.losses} />
             </Col>
           </Row>
+
           <div className='home-heading-container'>
             <Title level={2} className='home-title'>
               Most Played Champions
             </Title>
           </div>
-
-          <Rend />
         </>
       ) : (
         <>
