@@ -14,7 +14,7 @@ const Homepage = () => {
   const [playerStats, setPlayerStats] = useState({});
   const [champStats, setChampStats] = useState({});
 
-  const API_KEY = "RGAPI-7f299e10-ff24-4589-9f8e-9126dd538c1a";
+  const API_KEY = "RGAPI-30c0e749-44a0-46b9-b8f4-5108697bee46";
 
   function searchForPlayer(event) {
     var APICallSummoner =
@@ -71,7 +71,7 @@ const Homepage = () => {
         console.log(error);
       });
   }
-
+  
   function Rend() {
     const cham = [];
     console.log(championNames[champStats[0].championId]);
