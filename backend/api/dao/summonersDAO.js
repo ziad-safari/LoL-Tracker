@@ -9,7 +9,7 @@ export default class summonersDAO {
             summoners = await conn.db(process.env.TRACKER_NS).collection("summoners")
         } catch (e) {
             console.error(
-                'Unable to establish a collection handle in restaurantsDAO: ' +e,
+                'Unable to establish a collection handle in summonersDAO: ' +e,
             )
         }
     }
