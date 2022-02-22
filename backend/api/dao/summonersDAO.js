@@ -13,5 +13,21 @@ export default class summonersDAO {
             )
         }
     }
-}
 
+    // getting a summoner? 
+
+    static async getSummoner({
+        filters = null
+    } = {}) {
+        let query 
+        query = { "id" : { $eq: filters["id"] } }
+        
+        let cursor
+        try { 
+            cursor = await summoners
+            .find(query)
+        } catch (e) {
+            console.error('Unable to issue find command' +e)
+        }
+    }
+}
