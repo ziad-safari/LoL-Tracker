@@ -72,16 +72,6 @@ const Homepage = () => {
       });
   }
   
-  function Rend() {
-    const cham = [];
-    console.log(championNames[champStats[0].championId]);
-    for (var i = 0; i < championNames.length; i++) {
-      cham.push(championNames[champStats[i].championId]);
-    }
-
-    return <>{cham}</>;
-  }
-
   // Total Games Played
   const total = playerStats.wins + playerStats.losses;
   const rank = playerStats.tier + " " + playerStats.rank;
