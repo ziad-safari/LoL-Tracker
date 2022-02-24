@@ -3,7 +3,6 @@ import { useState } from "react";
 import { Typography, Row, Col, Statistic } from "antd";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { leagueCards } from "../components";
 import championNames from "./championNames.json";
 
 const { Title } = Typography;
@@ -14,7 +13,7 @@ const Homepage = () => {
   const [playerStats, setPlayerStats] = useState({});
   const [champStats, setChampStats] = useState({});
 
-  const API_KEY = "RGAPI-30c0e749-44a0-46b9-b8f4-5108697bee46";
+  const API_KEY = "RGAPI-ed960078-5f6d-4d41-84b1-70e8c208608f";
 
   function searchForPlayer(event) {
     var APICallSummoner =
@@ -30,7 +29,6 @@ const Homepage = () => {
         if (response.data) {
           searchPlayerData(response.data.id);
           searchChampion(response.data.id);
-          Rend();
         }
       })
       .catch(function (error) {
@@ -49,6 +47,7 @@ const Homepage = () => {
       .get(API)
       .then(function (response) {
         setChampStats(response.data);
+        console.log(response.data);
       })
       .catch(function (error) {
         console.log(error);
@@ -65,16 +64,15 @@ const Homepage = () => {
     axios
       .get(API)
       .then(function (response) {
-        setPlayerStats(response.data[1]);
+        setPlayerStats(response.data[0]);
       })
       .catch(function (error) {
         console.log(error);
       });
   }
-  
   // Total Games Played
-  const total = playerStats.wins + playerStats.losses;
   const rank = playerStats.tier + " " + playerStats.rank;
+  const total = playerStats.wins + playerStats.losses;
 
   return (
     <>
@@ -94,6 +92,7 @@ const Homepage = () => {
 
       {JSON.stringify(playerData) != "{}" &&
       JSON.stringify(playerStats) != "{}" ? (
+
         <>
           <h1>{playerData.name}</h1>
           <img
@@ -119,13 +118,80 @@ const Homepage = () => {
               <Statistic title='Solo/Duo Losses' value={playerStats.losses} />
             </Col>
           </Row>
+
           <div className='home-heading-container'>
             <Title level={2} className='home-title'>
               Most Played Champions
             </Title>
           </div>
-
-          <Rend />
+          <Row>
+            <Col span={12}>
+              <Statistic value={championNames[champStats[0].championId]} />
+              <img
+                width='100'
+                height='100'
+                src={
+                  "http://ddragon.leagueoflegends.com/cdn/12.4.1/img/champion/" +
+                  championNames[champStats[0].championId] +
+                  ".png"
+                }></img>
+            </Col>
+            <Col span={12}>
+              <Statistic value={championNames[champStats[1].championId]} />
+              <img
+                width='100'
+                height='100'
+                src={
+                  "http://ddragon.leagueoflegends.com/cdn/12.4.1/img/champion/" +
+                  championNames[champStats[1].championId] +
+                  ".png"
+                }></img>
+            </Col>
+            <Col span={12}>
+              <Statistic value={championNames[champStats[2].championId]} />
+              <img
+                width='100'
+                height='100'
+                src={
+                  "http://ddragon.leagueoflegends.com/cdn/12.4.1/img/champion/" +
+                  championNames[champStats[2].championId] +
+                  ".png"
+                }></img>
+            </Col>
+            <Col span={12}>
+              <Statistic value={championNames[champStats[3].championId]} />
+              <img
+                width='100'
+                height='100'
+                src={
+                  "http://ddragon.leagueoflegends.com/cdn/12.4.1/img/champion/" +
+                  championNames[champStats[3].championId] +
+                  ".png"
+                }></img>
+            </Col>
+            <Col span={12}>
+              <Statistic value={championNames[champStats[4].championId]} />
+              <img
+                width='100'
+                height='100'
+                src={
+                  "http://ddragon.leagueoflegends.com/cdn/12.4.1/img/champion/" +
+                  championNames[champStats[4].championId] +
+                  ".png"
+                }></img>
+            </Col>
+            <Col span={12}>
+              <Statistic value={championNames[champStats[5].championId]} />
+              <img
+                width='100'
+                height='100'
+                src={
+                  "http://ddragon.leagueoflegends.com/cdn/12.4.1/img/champion/" +
+                  championNames[champStats[5].championId] +
+                  ".png"
+                }></img>
+            </Col>
+          </Row>
         </>
       ) : (
         <>
