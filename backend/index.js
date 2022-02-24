@@ -32,17 +32,19 @@ MongoClient.connect(
 
     // get summoner info 
     app.get('/summonerGet', (req, res) => {
-        const id = req.body.id
-
+        const dbo = client.db("lol-tracker")
+        
         res.send("yo mama")
     })
     
     // make the endpoint here for 
     app.post('/summonerUpdate', (req, res) => {
-
-        const id = req.body.id 
-        
-        res.send()
+        const dbo = client.db("lol-tracker")
+        dbo.collection("summoners").insertOne({
+            id : req.body.id,
+            name : req.body.name
+        })
+        res.send("posted")
     })
     
 })
