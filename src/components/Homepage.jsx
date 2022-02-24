@@ -70,7 +70,6 @@ const Homepage = () => {
         console.log(error);
       });
   }
-
   // Total Games Played
   const rank = playerStats.tier + " " + playerStats.rank;
   const total = playerStats.wins + playerStats.losses;
@@ -83,14 +82,17 @@ const Homepage = () => {
       <input
         type='text'
         onChange={(e) => setSearchText(e.target.value)}></input>
+        
       <button
         onClick={(e) => {
           searchForPlayer(e);
         }}>
         Search Player
       </button>
-      {JSON.stringify(playerData) !== "{}" &&
-      JSON.stringify(playerStats) !== "{}" ? (
+
+      {JSON.stringify(playerData) != "{}" &&
+      JSON.stringify(playerStats) != "{}" ? (
+
         <>
           <h1>{playerData.name}</h1>
           <img
