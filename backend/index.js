@@ -3,6 +3,7 @@ import mongodb from "mongodb"
 import dotenv from "dotenv"
 import lol_tracker from "./api/lol_tracker.route.js"
 import Summoners from "./models/summonerSchema.js"
+import axios from "axios";
 
 dotenv.config()
 const MongoClient = mongodb.MongoClient
@@ -33,12 +34,13 @@ MongoClient.connect(
     // get summoner info 
     app.get('/summonerGet', (req, res) => {
         const dbo = client.db("lol-tracker")
-        
+        // make the external api calls here to riot using axios
         res.send("yo mama")
     })
     
     // make the endpoint here for 
     app.post('/summonerUpdate', (req, res) => {
+        // call this when "update" is pressed
         const dbo = client.db("lol-tracker")
         dbo.collection("summoners").insertOne({
             id : req.body.id,
