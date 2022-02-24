@@ -94,12 +94,14 @@ const Homepage = () => {
       <input
         type='text'
         onChange={(e) => setSearchText(e.target.value)}></input>
+        
       <button
         onClick={(e) => {
           searchForPlayer(e);
         }}>
         Search Player
       </button>
+
       {JSON.stringify(playerData) != "{}" &&
       JSON.stringify(playerStats) != "{}" ? (
         <>

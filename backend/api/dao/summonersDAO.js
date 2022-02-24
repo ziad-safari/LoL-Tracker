@@ -30,4 +30,5 @@ export default class summonersDAO {
             console.error('Unable to issue find command' +e)
         }
     }
+    
 }
